@@ -1,0 +1,140 @@
+<%- include('./layouts/head.ejs') %>
+
+    <body>
+        <div class="wrapper">
+            <%- include('./layouts/nav-user.ejs') %>
+                <div class="main-panel">
+                    <div class="container mt-5">
+                        <div class="card mb-3" style="border-radius: .5rem;">
+                            <div class="row g-0 p-4">
+                                <div class="card-body p-4">
+                                <h6>Chi tiết giao dịch</h6>
+                                <% if(transaction.status_transaction === 0) { %>
+                                    <span class="badge badge-success  rounded-pill d-inline">Duyệt</span> 
+                                    <% }else if(transaction.status_transaction === 1){ %>
+                                        <span class="badge  badge-primary rounded-pill d-inline">Chờ duyệt</span>
+                                        <% }else{ %>
+                                          <span class="badge badge-warning rounded-pill d-inline">Từ chối</span>
+                                          <% } %>
+                                <hr class="mt-0 mb-4">
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Mã giao dịch</h6>
+                                            <p class="text-muted">
+                                                <%= transaction._id %>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Ngày giao dịch</h6>
+                                            <p class="text-muted">
+                                                <%=transaction.time.toLocaleString('vi-VN', { hour12: true })%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% if(transaction.kind === 3) { %> <!--Hiển thị các thông tin cần thiết cho giao dịch mua thẻ cào-->
+                                <hr class="mt-0 mb-4">
+                                <div class="row mb-4">
+
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Mệnh giá thẻ</h6>
+                                            <p class="text-muted">
+                                                <%= transaction.price%>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h6>Số lượng</h6>
+                                        <p class="text-muted">
+                                            <%= transaction.quantity%>
+                                        </p>
+                                    </div>
+                                    
+                                </div>
+                                <hr class="mt-0 mb-4">
+                                <div class="row mb-4">
+
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Mã thẻ</h6>
+                                            <p class="text-muted">
+                                                <%= transaction.number_card%>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h6>Nhà mạng</h6>
+                                        <p class="text-muted">
+                                            <%= transaction.name_card%>
+                                        </p>
+                                    </div>
+                                    
+                                </div>
+                                <% } %>
+                                <hr class="mt-0 mb-4">
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Số tiền</h6>
+                                            <p class="text-muted">
+                                                <%= transaction.money.toLocaleString("en-US") %>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Phí giao dịch</h6>      
+                                            <p class="text-muted">
+                                                
+                                                        <%= (transaction.fee).toLocaleString("en-US") %>
+                                                        
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="mt-0 mb-4">
+                                <div class="row mb-4">
+
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Lời nhắn</h6>
+                                            <p class="text-muted">
+                                                <%= transaction.note %>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h6>Loại giao dịch</h6>  <!-- kind : (nạp tiền: 0, chuyển tiền: 1, rút tiền: 2, mua thẻ: 3)-->
+                                        <% if(transaction.kind === 0) { %>
+                                            <p class="text-muted"> Nạp tiền </p>
+                                        <% } else if(transaction.kind === 1) {%>
+                                            <p class="text-muted"> Chuyển tiền </p>
+                                            <% } else if(transaction.kind === 2) {%>
+                                                <p class="text-muted"> Rút tiền </p>
+                                                <% } else {%>
+                                                    <p class="text-muted"> Mua thẻ </p>
+                                                    <% } %>
+                                    </div>
+                                   
+                                </div>
+                               
+                            </div>
+                        
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </body>
+
+    </html>

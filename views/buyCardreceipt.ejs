@@ -1,0 +1,79 @@
+<%- include('./layouts/head.ejs') %>
+
+    <body>
+        <div class="wrapper">
+            <%- include('./layouts/nav-user.ejs') %>
+                <div class="main-panel">
+                    <div class="container mt-5">
+                        <div class="card mb-3" style="border-radius: .5rem;">
+                            <div class="row g-0 p-4">
+                                <div class="card-body p-4">
+                                <h6>Chi tiết hóa đơn</h6>                                
+                                <hr class="mt-0 mb-4">
+                                  <!--Hiển thị chung-->
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Mệnh giá thẻ</h6>
+                                            <p class="text-muted">
+                                                <%=price.toLocaleString("en-US")%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Số lượng</h6>
+                                            <p class="text-muted">
+                                                <%=quantity %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <hr class="mt-0 mb-4">
+                                <div class="row mb-4">
+                                     <!-- hiển thị nạp thẻ với kind:3-->
+                                    <div class="col">
+                                        <h6>Mã thẻ nạp</h6>
+                                            <p class="text-muted">
+                                                <%=number_card%>
+                                            </p>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Nhà mạng</h6>
+                                            <p class="text-muted">
+                                                <%=name_card%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="mt-0 mb-4">
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Phí giao dịch</h6>
+                                            <p class="text-muted">
+                                                <%=fee%>
+                                            </p>
+                                        </div>
+                                    </div>                                    
+                                    <div class="col">
+                                        <h6>Tổng phí thanh toán</h6>
+                                            <p class="text-muted">
+                                                <%=money.toLocaleString("en-US") %>
+                                            </p>
+                                    </div>
+                                </div>
+                                <form action="/user/buyCard_done" >
+                                <button type="submit"  class="btn btn-primary btn-block ">Quay lại</button>
+                            </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </body>
+
+    </html>

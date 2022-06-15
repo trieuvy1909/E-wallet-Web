@@ -1,0 +1,99 @@
+<%- include('./layouts/head.ejs') %>
+
+    <body>
+        <div class="wrapper">
+            <%- include('./layouts/nav-user.ejs') %>
+                <div class="main-panel">
+
+                    <section class="vh-100" style="background-color: #f4f5f7;">
+                        <div class="container py-5 h-100">
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col col-lg-12 mb-4 mb-lg-0">
+                                    <div class="card mb-3" style="border-radius: .5rem;">
+                                        <div class="row g-0">
+                                            <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                                                
+                                                <h5 class="mt-5">
+                                                    <%= fullname %>
+                                                </h5>
+                                                <p>
+                                                    <%= birthday %>
+                                                </p>
+                                                <i class="far fa-edit mb-5"></i>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body p-4">
+                                                    <h6>Thông tin cá nhân</h6>
+                                                    <% if(status === 0){
+                                                        %>
+                                                        <span class="badge rounded-pill bg-primary text-dark mb-2">Chưa xác minh</span>
+                                                        <% }else if(status === 1){
+                                                            %>
+                                                            <span class="badge rounded-pill bg-success text-white mb-2">Đã xác minh</span>
+                                                            <% }else if(status === 2){ %>
+                                                                <span class="badge rounded-pill bg-warning text-white mb-2">Chờ cập nhật</span>
+                                                                <% } %>
+                                                                    <hr class="mt-0 mb-4">
+                                                                    <div class="row pt-1">
+                                                                        <div class="col-6 mb-3">
+                                                                            <h6>Email</h6>
+                                                                            <p class="text-muted">
+                                                                                <%= email %>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="col-6 mb-3">
+                                                                            <h6>Số điện thoại</h6>
+                                                                            <p class="text-muted">
+                                                                                <%= phone %>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <hr class="mt-0 mb-4">
+                                                                    <div class="row pt-1">
+                                                                        <div class="col-6 mb-3">
+                                                                            <h6>Địa chỉ</h6>
+                                                                            <p class="text-muted">
+                                                                                <%= address %>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="col-6 mb-3">
+                                                                            <h6>Số dư tài khoản</h6>
+                                                                            <p class="text-muted">
+                                                                                <%= account_balance.toLocaleString("en-US") %>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <% if(status === 2){ %>
+                                                                        <form method="post" action="/user/updateprofile" enctype="multipart/form-data">
+                                                                            <h6>Bổ sung ảnh CMND/CCCD</h6>
+                                                                            <hr class="mt-0 mb-4">
+                                                                            <div class="row pt-1">
+                                                                                <div class="col-6 mb-3">
+                                                                                    <h6>Mặt trước</h6>
+                                                                                    <input value="<%= idcard_front %>" type="file" name="idcard_front" class="form-control form-control-lg" />
+                                                                                  
+                                                                                </div>
+                                                                                <div class="col-6 mb-3">
+                                                                                    <h6>Mặt sau</h6>
+                                                                                    <input value="<%= idcard_back %>" type="file" name="idcard_back" class="form-control form-control-lg" />
+                                                                                </div>
+                                                                              
+                                                                                <input class="btn btn-primary btn-lg gradient-custom" type="submit" value="Bổ sung" />
+                                                                            </div>
+                                                                        </form>
+                                                                        <% } %>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+        </div>
+    </body>
+
+    </html>

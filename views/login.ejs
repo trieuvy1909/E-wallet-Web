@@ -1,0 +1,73 @@
+<%- include('./layouts/head.ejs') %>
+
+    <body class="gradient-custom-2">
+        <section class="h-100 loginform">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-xl-10">
+                        <div class="card rounded-3 text-black">
+                            <div class="row g-0">
+                                <div class="col-lg-6">
+                                    <div class=" p-md-5 mx-md-4">
+                                        <div class="text-center">
+                                            <img src="data:image/png;base64,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"
+                                                style="width: 185px; height: 150px;" alt="logo">
+                                            <h4 class="mt-1 mb-5 pb-1">Ví điện tử E-Wallet</h4>
+                                        </div>
+
+                                        <form action="/" method="post">
+                                         
+                                            <div class="form-group mb-4">
+                                                <label class=" form-label " for="username">Username</label>
+                                                <input value="<%= username %>" name="username" type="text" id="username" class="form-control" placeholder="Số tài khoản" />
+                                                
+                                            </div>
+
+                                            <div class="form-group mb-4 ">
+                                                <label class="form-label " for="password">Password</label>
+                                                <input value="<%= password %>" name="password" type="password" id="password" placeholder="Nhập mật khẩu" class="form-control " />
+                                                
+                                            </div>
+
+                                            <div class="text-center pt-1 mb-5 pb-1 ">
+                                                <button class="btn btn-primary btn-block fa-lg gradient-custom mb-3 " type="button ">Đăng nhập</button>
+                                                <a class="text-muted " href="/resetPassword">Quên mật khẩu?</a>
+                                            </div>
+                                            <% if(error){ %>
+                                                <div class="alert alert-danger mb-3">
+                                                    <strong>Lưu ý!</strong>
+                                                    <%= error %>
+                                                </div>
+                                                <%}%>
+
+                                                    <div class="d-flex align-items-center justify-content-center pb-4 ">
+                                                        <p class="mb-0 me-2 ">Bạn chưa có tài khoản?</p>
+                                                        <a href="/register" type="button " class="btn btn-outline-danger ">Tạo mới</a>
+                                                    </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 d-flex align-items-center gradient-custom ">
+                                    <div class="text-white px-3 py-4 p-md-5 mx-md-4 ">
+                                        <h4 class="mb-4 ">Thành viên</h4>
+                                        <p class="small mb-0 ">Trương Tấn Hùng - 51900083</p>
+                                        <p class="small mb-0 ">Huỳnh Quang Huy - 51900088</p>
+                                        <p class="small mb-0 ">Trần Minh Kha - 51900101</p>
+                                        <p class="small mb-0 ">Lê Triệu Vỷ - 51900290</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <script src="/Js/main.js"></script>
+    </body>
+
+    </html>
+    <script>
+        createAutoClosingAlert(".alert-danger", 2000);
+    </script>

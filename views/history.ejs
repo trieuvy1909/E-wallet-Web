@@ -1,0 +1,70 @@
+<%- include('./layouts/head.ejs') %>
+
+    <body>
+        <div class="wrapper">
+            <%- include('./layouts/nav-user.ejs') %>
+                <div class="main-panel">
+                  <h1 class="text-center">Lịch sử giao dịch</h1>
+                    <table class="table align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>THỨ TỰ GIAO DỊCH</th>
+                                <th>TIỀN GIAO DỊCH</th>
+                                <th>LOẠI GIAO DỊCH</th>
+                                <th>TRẠNG THÁI</th>
+                                <th>NGÀY GIAO DỊCH</th>
+                                <th>THAO TÁC</th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                          
+
+                            <% his.forEach(function(h,index) { %>
+                              <tr>
+                                <td>
+                                  <%= (index + 1) %>
+                                </td>
+                                <td>
+                                    <%=h.money.toLocaleString("en-US");%> 
+                                  </td>
+                                  <!-- kind-chuyển tiền: 0, nạp tiền: 1, rút tiền: 2, mua thẻ: 3 -->  
+                                  <td>
+                                      <% if(h.kind === 0) { %>
+                                          <span class="badge badge-success rounded-pill d-inline">Nạp tiền</span> 
+                                          <% }else if(h.kind === 1){ %>
+                                              <span class="badge badge-primary rounded-pill d-inline">Chuyển tiền</span>
+                                              <% }else if(h.kind === 2){ %>
+                                                  <span class="badge  badge-info rounded-pill d-inline">Rút tiền</span>
+                                                  <% }else{ %>
+                                                      <span class="badge badge-dark rounded-pill d-inline">Mua thẻ</span>
+                                                      <% } %>
+
+                                  </td>
+                                  <!-- 0:duyệt, 1:chờ duyệt, 2:từ chối -->
+                                  <td> 
+                                    <% if(h.status_transaction === 0) { %>
+                                      <span class="badge badge-success  rounded-pill d-inline">Duyệt</span> 
+                                      <% }else if(h.status_transaction === 1){ %>
+                                          <span class="badge  badge-primary rounded-pill d-inline">Chờ duyệt</span>
+                                          <% }else{ %>
+                                            <span class="badge badge-warning rounded-pill d-inline">Từ chối</span>
+                                            <% } %>
+                                  </td>
+                                  <td>
+                                    <%=h.time.toLocaleString('vi-VN',{ hours12: true })%>
+                                  </td>
+                                  <td>
+                                    <a  href="/user/detailhistory/<%=h._id %>" type="button" class="btn-primary  btn-sm btn-rounded"> Xem chi tiết</a>
+                                </td>
+                               
+                              </tr>
+                                <% }); %>
+                        </tbody>
+                        
+                    </table>
+                </div>
+        </div>
+    </body>
+
+    </html>

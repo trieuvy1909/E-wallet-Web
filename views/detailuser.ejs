@@ -1,0 +1,188 @@
+<%- include('./layouts/head.ejs') %>
+
+    <body>
+        <div class="wrapper">
+            <%- include('./layouts/nav-admin.ejs') %>
+                <div class="main-panel ">
+                    <section class="h-100 "
+                        style="background: linear-gradient(to right, rgb(237 242 247), rgb(216 223 231));">
+                        <div class="container h-100">
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col col-lg-9 col-xl-7">
+                                    <div class="card">
+                                        <div class="rounded-top text-white d-flex flex-row"
+                                            style="background-color: #000; height:90px;">
+
+                                            <div class="ms-3" style="margin-top: 10px;">
+                                                <h5>
+                                                    <%=user.fullname%>
+                                                </h5>
+                                                <p>
+                                                    <% if(user.status === 0) { %>
+                                                        <span class="badge badge-primary rounded-pill d-inline">Chưa xác minh</span>
+                                                        <% }else if(user.status === 1){ %>
+                                                            <span class="badge badge-success rounded-pill d-inline">Đã xác minh</span>
+                                                                <% }else if(user.status === 2){ %>
+                                                                    <span class="badge badge-warning rounded-pill d-inline">Đang cập nhật</span>
+                                                                    <% }else if(user.status === 3){ %>
+                                                                        <span class="badge badge-warning rounded-pill d-inline">Đang khóa</span>
+                                                                    <%} else{ %>
+                                                                    <span class="badge badge-danger rounded-pill d-inline">Khóa vô thời hạn</span>
+                                                                    <% } %>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body p-4 text-black">
+                                            <div class="mb-5">
+                                                <p class="lead fw-normal mb-1">THÔNG TIN</p>
+                                                <div class="p-4" style="background-color: #f8f9fa;">
+                                                    <p class="font-italic mb-1">Email:
+                                                        <%= user.email %>
+                                                    </p>
+                                                    <p class="font-italic mb-1">Phone:
+                                                        <%= user.phone %>
+                                                    </p>
+                                                    <p class="font-italic mb-0">Birthday:
+                                                        <%= user.birthday%>
+                                                    </p>
+                                                    <p class="font-italic mb-0">Địa chỉ:
+                                                        <%= user.address%>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                                <p class="lead fw-normal mb-0">Ảnh chứng minh nhân dân</p>
+
+                                            </div>
+                                            <div class="row g-2">
+                                                <div class="col mb-2">
+                                                    <img src="/uploads/<%=user.idcard_front%>" alt="Ảnh CMND mặt trước"
+                                                        class="w-100 rounded-3">
+                                                </div>
+                                                <div class="col mb-2">
+                                                    <img src="/uploads/<%= user.idcard_back%>" alt="Ảnh CMND mặt sau"
+                                                        class="w-100 rounded-3">
+                                                </div>
+                                            </div>
+                                            <% if(user.status !==1 & user.status !==3){ %>
+                                                <div class="row ">
+                                                    <div class="col-3 mb-1 text-center">
+
+                                                        <button value="1" name="status" data-toggle="modal"
+                                                            data-target="#confirm" class="btn btn-primary">Xác
+                                                            minh</button>
+
+                                                    </div>
+                                                    <div class="col-6 mb-1 text-center">
+
+                                                        <button value="2" name="status" data-toggle="modal"
+                                                            data-target="#additional" class="btn btn-warning">Yêu cầu bổ
+                                                            sung thông tin</button>
+
+                                                    </div>
+                                                    <div class="col-3 mb-1 text-center">
+
+                                                        <button value="3" name="status" class="btn btn-danger"
+                                                            data-toggle="modal" data-target="#lock">Huỷ</button>
+
+                                                    </div>
+                                                </div>
+                                                <% } %>
+                                                    <% if(user.status==3 ){ %>
+                                                        <div class="row">
+                                                            <div class="col-4 mb-1 text-center">
+                                                            </div>
+                                                            <div class="col-4 mb-1 text-center">
+                                                                <button value="0" name="status" class="btn btn-danger"
+                                                                    data-toggle="modal" data-target="#unlock">Mở
+                                                                    khóa</button>
+                                                            </div>
+                                                            <div class="col-4 mb-1 text-center">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+        </section>
+        </div>
+        </div>
+    </body>
+    <!-- Modal xác minh -->
+    <div id="confirm" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xác minh tài khoản này ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                    <form method="post">
+                        <button value="1" name="status" class="btn btn-primary">Xác nhận</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal yêu cầu bổ sung -->
+    <div id="additional" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn yêu cầu thêm thông tin từ tài khoản này ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                    <form method="post">
+                        <button value="2" name="status" class="btn btn-primary">Xác nhận</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal khóa tài khoản -->
+    <div id="lock" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn khóa tài khoản này?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                    <form method="post">
+                        <button value="3" name="status" class="btn btn-primary">Xác nhận</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal mở khóa tài khoản -->
+    <div id="unlock" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn mở khóa tài khoản này ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                    <form method="post">
+                        <button value="0" name="status" class="btn btn-primary">Xác nhận</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </html>

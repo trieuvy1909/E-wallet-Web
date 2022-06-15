@@ -1,0 +1,160 @@
+<%- include('./layouts/head.ejs') %>
+
+    <body>
+        <div class="wrapper">
+            <%- include('./layouts/nav-admin.ejs') %>
+                <div class="main-panel">
+                    <div class="container mt-5">
+                        <div class="card mb-3" style="border-radius: .5rem;">
+                            <div class="row g-0 p-4">
+                                <div class="card-body p-4">
+                                <h6>Chi tiết giao dịch</h6>
+                                <% if(transaction.status_transaction === 0) { %>
+                                    <span class="badge badge-success  rounded-pill d-inline">Duyệt</span> 
+                                    <% }else if(transaction.status_transaction === 1){ %>
+                                        <span class="badge  badge-primary rounded-pill d-inline">Chờ duyệt</span>
+                                        <% }else{ %>
+                                          <span class="badge badge-warning rounded-pill d-inline">Từ chối</span>
+                                          <% } %>
+                                <hr class="mt-0 mb-4">
+                                  <!--Hiển thị chung-->
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Mã giao dịch</h6>
+                                            <p class="text-muted">
+                                                <%= transaction._id %>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Ngày giao dịch</h6>
+                                            <p class="text-muted">
+                                                <%=transaction.time.toLocaleString('vi-VN', { hour12: true })%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="mt-0 mb-4">
+                                <div class="row mb-4">
+                                    <% if(transaction.kind === 1) { %>     <!-- hiển thị chuyển tiền với kind: 1-->
+                                    <div class="col">
+                                        <h6>Số tiền chuyển</h6>
+                                            <p class="text-muted">
+                                                <%= transaction.money.toLocaleString("en-US") %>
+                                            </p>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Loại giao dịch</h6>
+                                            <p class="text-muted">
+                                               Chuyển tiền
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                    <% if(transaction.kind === 2) { %>   <!--Hiển thị rút tiền kind: 2-->
+                                        <div class="col">
+                                            <h6>Số tiền rút</h6>
+                                                <p class="text-muted">
+                                                    <%= transaction.money.toLocaleString("en-US") %>
+                                                </p>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <h6>Loại giao dịch</h6>
+                                                <p class="text-muted">
+                                                   Rút tiền
+                                                </p>
+    
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                </div>
+                                <hr class="mt-0 mb-4">
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6>Phí giao dịch</h6>
+                                            <p class="text-muted">
+                                                <%= (transaction.fee).toLocaleString("en-US") %>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                                                       
+                                    <div class="col">
+                                        <h6>Lời nhắn</h6>
+                                            <p class="text-muted">
+                                                <%= transaction.note %>
+                                            </p>
+                                    </div>
+                                </div>
+
+                                <!--các button-->
+                                <% if(transaction.status_transaction !== 0){ %>
+                                <hr class="mt-0 mb-4">
+                                <div class="row mb-4">
+                                    <div class="col">
+                                       
+                                            <button value="0" name="status_transaction" class="btn btn-primary" data-toggle="modal" data-target="#yes" >Đồng ý</button>
+                                    
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group"> 
+                                          
+                                                <button value="2"name="status_transaction" class="btn btn-danger" data-toggle="modal" data-target="#no">Huỷ</button>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
+                               
+                            </div>
+                        
+                        
+                        </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </body>
+<!-- Modal chấp nhận giao dịch -->
+<div id="yes" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">       
+        <div class="modal-body">
+          <p>Bạn có chắc chắn phê duyệt giao dịch này?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+              <form method="post">
+                <button  value="0" name="status_transaction"  class="btn btn-primary">Xác nhận</button>
+             </form>
+        </div>
+      </div>  
+    </div>
+  </div>
+  <!-- Modal không chấp giao dịch -->
+<div id="no" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">       
+        <div class="modal-body">
+          <p>Bạn có chắc chắn không chấp nhận giao dịch này ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+              <form method="post">
+                <button  value="2" name="status_transaction"  class="btn btn-primary">Xác nhận</button>
+             </form>
+        </div>
+      </div>  
+    </div>
+  </div>
+    </html>

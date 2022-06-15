@@ -1,0 +1,80 @@
+<%- include('./layouts/head.ejs') %>
+
+    <body>
+        <div class="wrapper">
+            <%- include('./layouts/nav-user.ejs') %>
+                <div class="main-panel">
+                    <div class="container mt-5">
+                        <div class="card mb-3" style="border-radius: .5rem;">
+                            <div class="row g-0 p-4">
+                                <h1>Rút tiền</h1>
+                                <form action="/user/withdrawMoney" method="post">
+                                    <!-- số the và ngày hết hạn -->
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label" for="numberCard">Số thẻ</label>
+                                                <input type="text" name="numberCard" id="numberCard" class="form-control" />
+
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label" for="dateExp">Ngày hết hạn</label>
+                                                <input type="date" name="dateExp" id="dateExp" class="form-control" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Mã Cvv và số tiền rút -->
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label" for="cvv">Mã CVV</label>
+                                                <input type="text" name="cvv" id="cvv" class="form-control" />
+
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label" for="money">Số tiền rút</label>
+                                                <input onclick="calcFee()"  type="number" min="0.0" name="money" id="money" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label" for="fee">Phí giao dịch</label>
+                                                <input type="number" name="fee" id="fee" class="form-control" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="form-label" class="form-label">Ghi chú</label>
+                                        <textarea class="form-control" name="note" id="note" rows="3"></textarea>
+                                    </div>
+
+                                    <% if(error){ %>
+                                        <div class="alert alert-danger mb-3">
+                                            <strong>Lưu ý!</strong>
+                                            <%= error %>
+                                        </div>
+                                        <%}%>
+                                            <!-- Submit button -->
+                                            <button type="submit" class="btn btn-primary btn-block ">Rút</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+       
+        <script src="/Js/main.js"></script>
+        <script>
+            createAutoClosingAlert(".alert-danger", 2000);
+  
+        </script>
+    </body>
+
+    </html>

@@ -1,0 +1,52 @@
+<%- include('./layouts/head.ejs') %>
+
+    <body>
+        <div class="wrapper">
+            <%- include('./layouts/nav-admin.ejs') %>
+                <div class="main-panel p-4">
+                    <table class="table align-middle mb-0 bg-white">
+                        <h2 class="text-center">TÀI KHOẢN CHỜ KÍCH HOẠT</h2>
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Tên và email</th>
+                                <th>Username</th>
+                                <th>Ngày đăng ký</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach((e, index) =>{ %>
+                                <tr id="<%= e.id %>">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1">
+                                                    <%= e.fullname %>
+                                                </p>
+                                                <p class="text-muted mb-0">
+                                                    <%= e.email %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="fw-normal mb-1">
+                                            <%= e.username %>
+                                        </p>
+
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-success rounded-pill d-inline"><%= e.date_register.toLocaleString("en-US") %></span>
+                                    </td>
+                                    <td>
+                                        <a href="/admin/detailuser/<%=e._id %>" type="button" class="btn-primary  btn-sm btn-rounded"> Xem chi tiết</a>
+                                    </td>
+                                </tr>
+                                <% })%>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </body>
+
+    </html>
